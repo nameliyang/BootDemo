@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.DailyStockMapper">
+  <resultMap id="BaseResultMap" type="com.example.model.DailyStock">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="date" jdbcType="TIMESTAMP" property="date" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="tclose" jdbcType="DOUBLE" property="tclose" />
+    <result column="high" jdbcType="DOUBLE" property="high" />
+    <result column="low" jdbcType="DOUBLE" property="low" />
+    <result column="topen" jdbcType="DOUBLE" property="topen" />
+    <result column="lclose" jdbcType="DOUBLE" property="lclose" />
+    <result column="chg" jdbcType="DOUBLE" property="chg" />
+    <result column="pchg" jdbcType="DOUBLE" property="pchg" />
+    <result column="turnover" jdbcType="DOUBLE" property="turnover" />
+    <result column="voturnover" jdbcType="DOUBLE" property="voturnover" />
+    <result column="vaturnove" jdbcType="DOUBLE" property="vaturnove" />
+    <result column="tcap" jdbcType="DOUBLE" property="tcap" />
+    <result column="mcap" jdbcType="DOUBLE" property="mcap" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, date, code, name, tclose, high, low, topen, lclose, chg, pchg, turnover, voturnover, 
+    vaturnove, tcap, mcap
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_dailystock
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_dailystock
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.model.DailyStock">
+    insert into t_dailystock (id, date, code, 
+      name, tclose, high, low, 
+      topen, lclose, chg, pchg, 
+      turnover, voturnover, vaturnove, 
+      tcap, mcap)
+    values (#{id,jdbcType=INTEGER}, #{date,jdbcType=TIMESTAMP}, #{code,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{tclose,jdbcType=DOUBLE}, #{high,jdbcType=DOUBLE}, #{low,jdbcType=DOUBLE}, 
+      #{topen,jdbcType=DOUBLE}, #{lclose,jdbcType=DOUBLE}, #{chg,jdbcType=DOUBLE}, #{pchg,jdbcType=DOUBLE}, 
+      #{turnover,jdbcType=DOUBLE}, #{voturnover,jdbcType=DOUBLE}, #{vaturnove,jdbcType=DOUBLE}, 
+      #{tcap,jdbcType=DOUBLE}, #{mcap,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.model.DailyStock">
+    insert into t_dailystock
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="tclose != null">
+        tclose,
+      </if>
+      <if test="high != null">
+        high,
+      </if>
+      <if test="low != null">
+        low,
+      </if>
+      <if test="topen != null">
+        topen,
+      </if>
+      <if test="lclose != null">
+        lclose,
+      </if>
+      <if test="chg != null">
+        chg,
+      </if>
+      <if test="pchg != null">
+        pchg,
+      </if>
+      <if test="turnover != null">
+        turnover,
+      </if>
+      <if test="voturnover != null">
+        voturnover,
+      </if>
+      <if test="vaturnove != null">
+        vaturnove,
+      </if>
+      <if test="tcap != null">
+        tcap,
+      </if>
+      <if test="mcap != null">
+        mcap,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="tclose != null">
+        #{tclose,jdbcType=DOUBLE},
+      </if>
+      <if test="high != null">
+        #{high,jdbcType=DOUBLE},
+      </if>
+      <if test="low != null">
+        #{low,jdbcType=DOUBLE},
+      </if>
+      <if test="topen != null">
+        #{topen,jdbcType=DOUBLE},
+      </if>
+      <if test="lclose != null">
+        #{lclose,jdbcType=DOUBLE},
+      </if>
+      <if test="chg != null">
+        #{chg,jdbcType=DOUBLE},
+      </if>
+      <if test="pchg != null">
+        #{pchg,jdbcType=DOUBLE},
+      </if>
+      <if test="turnover != null">
+        #{turnover,jdbcType=DOUBLE},
+      </if>
+      <if test="voturnover != null">
+        #{voturnover,jdbcType=DOUBLE},
+      </if>
+      <if test="vaturnove != null">
+        #{vaturnove,jdbcType=DOUBLE},
+      </if>
+      <if test="tcap != null">
+        #{tcap,jdbcType=DOUBLE},
+      </if>
+      <if test="mcap != null">
+        #{mcap,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.model.DailyStock">
+    update t_dailystock
+    <set>
+      <if test="date != null">
+        date = #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="tclose != null">
+        tclose = #{tclose,jdbcType=DOUBLE},
+      </if>
+      <if test="high != null">
+        high = #{high,jdbcType=DOUBLE},
+      </if>
+      <if test="low != null">
+        low = #{low,jdbcType=DOUBLE},
+      </if>
+      <if test="topen != null">
+        topen = #{topen,jdbcType=DOUBLE},
+      </if>
+      <if test="lclose != null">
+        lclose = #{lclose,jdbcType=DOUBLE},
+      </if>
+      <if test="chg != null">
+        chg = #{chg,jdbcType=DOUBLE},
+      </if>
+      <if test="pchg != null">
+        pchg = #{pchg,jdbcType=DOUBLE},
+      </if>
+      <if test="turnover != null">
+        turnover = #{turnover,jdbcType=DOUBLE},
+      </if>
+      <if test="voturnover != null">
+        voturnover = #{voturnover,jdbcType=DOUBLE},
+      </if>
+      <if test="vaturnove != null">
+        vaturnove = #{vaturnove,jdbcType=DOUBLE},
+      </if>
+      <if test="tcap != null">
+        tcap = #{tcap,jdbcType=DOUBLE},
+      </if>
+      <if test="mcap != null">
+        mcap = #{mcap,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.model.DailyStock">
+    update t_dailystock
+    set date = #{date,jdbcType=TIMESTAMP},
+      code = #{code,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      tclose = #{tclose,jdbcType=DOUBLE},
+      high = #{high,jdbcType=DOUBLE},
+      low = #{low,jdbcType=DOUBLE},
+      topen = #{topen,jdbcType=DOUBLE},
+      lclose = #{lclose,jdbcType=DOUBLE},
+      chg = #{chg,jdbcType=DOUBLE},
+      pchg = #{pchg,jdbcType=DOUBLE},
+      turnover = #{turnover,jdbcType=DOUBLE},
+      voturnover = #{voturnover,jdbcType=DOUBLE},
+      vaturnove = #{vaturnove,jdbcType=DOUBLE},
+      tcap = #{tcap,jdbcType=DOUBLE},
+      mcap = #{mcap,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+</mapper>

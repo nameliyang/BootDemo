@@ -4,73 +4,45 @@ import java.util.Date;
 
 public class DailyStock {
 
-    /**
-     * 日期
-     */
+    private Integer id;
+
     private Date date;
 
     private String code;
 
     private String name;
 
-    /**
-     * 收盘价
-     */
     private Double tclose;
 
-    /**
-     * 最高价
-     */
     private Double high;
 
-    /**
-     * 最低价
-     */
     private Double low;
 
-    /**
-     * 开盘价
-     */
     private Double topen;
 
-    /**
-     * 前收盘
-     */
     private Double lclose;
 
-    /**
-     * 涨跌额
-     */
     private Double chg;
-    /**
-     * 涨跌幅
-     */
+
     private Double pchg;
 
-    /**
-     * 换手率
-     */
     private Double turnover;
 
-    /**
-     * 成交量
-     */
-    private Double voturnover;
+    private Long voturnover;
 
-    /**
-     * 成交金额
-     */
     private Double vaturnove;
 
-    /**
-     * 总市值
-     */
     private Double tcap;
 
-    /**
-     * 流通市值
-     */
     private Double mcap;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Date getDate() {
         return date;
@@ -85,7 +57,7 @@ public class DailyStock {
     }
 
     public void setCode(String code) {
-        this.code = code;
+        this.code = code == null ? null : code.trim();
     }
 
     public String getName() {
@@ -93,7 +65,7 @@ public class DailyStock {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name == null ? null : name.trim();
     }
 
     public Double getTclose() {
@@ -160,11 +132,11 @@ public class DailyStock {
         this.turnover = turnover;
     }
 
-    public Double getVoturnover() {
+    public Long getVoturnover() {
         return voturnover;
     }
 
-    public void setVoturnover(Double voturnover) {
+    public void setVoturnover(Long voturnover) {
         this.voturnover = voturnover;
     }
 
@@ -190,5 +162,27 @@ public class DailyStock {
 
     public void setMcap(Double mcap) {
         this.mcap = mcap;
+    }
+
+    @Override
+    public String toString() {
+        return "DailyStock{" +
+                "id=" + id +
+                ", date=" + date +
+                ", code='" + code + '\'' +
+                ", name='" + name + '\'' +
+                ", tclose=" + tclose +
+                ", high=" + high +
+                ", low=" + low +
+                ", topen=" + topen +
+                ", lclose=" + lclose +
+                ", chg=" + chg +
+                ", pchg=" + pchg +
+                ", turnover=" + turnover +
+                ", voturnover=" + voturnover +
+                ", vaturnove=" + vaturnove +
+                ", tcap=" + tcap +
+                ", mcap=" + mcap +
+                '}';
     }
 }

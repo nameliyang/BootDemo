@@ -1,10 +1,6 @@
 package com.example.helper;
 
 
-
-
-import com.alibaba.druid.sql.visitor.functions.Char;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,26 +14,34 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class StockCode {
-
+/**
+ * @author liyang
+ */
+public class StockSpider {
 
     public static void main(String[] args) throws IOException {
 
         List<Map<String, String>> stockCodes = getStockCodes(Stream.of('2', '5').collect(Collectors.toList()));
         for(Map<String,String> stocks :stockCodes){
-
+            System.out.println(stocks);
         }
+        System.out.println(stockCodes.size());
+
+        final List<Map<String, String>> stCollect = stockCodes.stream().filter(map -> !map.get("name").contains("ST")).collect(Collectors.toList());
+        System.out.println(stCollect.size());
+
+
 
     }
 
-    public static List<Map<String,String>> getStockCodes(List<Character> filter){
 
+    public static List<Map<String,String>> getStockCodes(List<Character> filter){
         String str = doGet("http://quote.eastmoney.com/stocklist.html");
         List<Map<String,String>> mapList = new ArrayList<>();
 
         List<String> codes = getSubUtil(str, " <li><a target=\"_blank\" href=\".*\">(.*)</a></li>");
 
-        Pattern pattern = Pattern.compile("(?<=\\()(.+?)(?=\\))");
+
         Set<String> test = new HashSet<>();
         codes.forEach(code -> {
             Map<String,String> codeInfo  = getCode(code);
