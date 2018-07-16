@@ -14,7 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CSVTest {
+public class CSVUtil {
 
 
     public static void main(String[] args) throws ParseException, IOException {
@@ -57,19 +57,26 @@ public class CSVTest {
         stock.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(split[0]));
         stock.setCode(split[1].startsWith("'")?split[1].substring(1,split[1].length()):split[1]);
         stock.setName(split[2]);
-        stock.setTclose(Double.parseDouble(split[3]));
-        stock.setHigh(Double.parseDouble(split[4]));
-        stock.setLow(Double.parseDouble(split[5]));
-        stock.setTopen(Double.parseDouble(split[6]));
-        stock.setLclose(Double.parseDouble(split[7]));
-        stock.setChg(Double.parseDouble(split[8]));
-        stock.setPchg(Double.parseDouble(split[9]));
-        stock.setTurnover(Double.parseDouble(split[10]));
+        stock.setTclose(format(split[3]));
+        stock.setHigh(format(split[4]));
+        stock.setLow(format(split[5]));
+        stock.setTopen(format(split[6]));
+        stock.setLclose(format(split[7]));
+        stock.setChg(format(split[8]));
+        stock.setPchg(format(split[9]));
+        stock.setTurnover(format(split[10]));
         stock.setVoturnover(Long.parseLong(split[11]));
-        stock.setVaturnove(Double.parseDouble(split[12]));
-        stock.setTcap(Double.parseDouble(split[13]));
-        stock.setMcap(Double.parseDouble(split[14]));
+        stock.setVaturnove(format(split[12]));
+        stock.setTcap(format(split[13]));
+        stock.setMcap(format(split[14]));
 
 
+    }
+
+    private static Double format(String s) {
+        if("none".equalsIgnoreCase(s)){
+            return null;
+        }
+        return Double.parseDouble(s);
     }
 }

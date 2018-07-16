@@ -1,5 +1,6 @@
 package com.example.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DailyStock {
@@ -11,15 +12,29 @@ public class DailyStock {
     private String code;
 
     private String name;
-
+    /**
+     * 收盘价
+     */
     private Double tclose;
 
+    /**
+     * 最高价
+     */
     private Double high;
 
+    /**
+     * 最低价
+     */
     private Double low;
 
+    /**
+     * 开盘价
+     */
     private Double topen;
 
+    /**
+     * 前收盘
+     */
     private Double lclose;
 
     private Double chg;
@@ -35,6 +50,26 @@ public class DailyStock {
     private Double tcap;
 
     private Double mcap;
+
+    private String  startDate;
+
+    private String  endDate;
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
 
     public Integer getId() {
         return id;
@@ -166,9 +201,10 @@ public class DailyStock {
 
     @Override
     public String toString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         return "DailyStock{" +
                 "id=" + id +
-                ", date=" + date +
+                ", date=" + sdf.format(date) +
                 ", code='" + code + '\'' +
                 ", name='" + name + '\'' +
                 ", tclose=" + tclose +

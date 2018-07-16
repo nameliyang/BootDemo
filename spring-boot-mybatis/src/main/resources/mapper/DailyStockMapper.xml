@@ -23,12 +23,34 @@
     id, date, code, name, tclose, high, low, topen, lclose, chg, pchg, turnover, voturnover, 
     vaturnove, tcap, mcap
   </sql>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from t_dailystock
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+  <select id="listBySo"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_dailystock
+    <where>
+      <if test="id != null ">id=#{id}</if>
+      <if test="name != null and name.length()>0">
+        and name=#{name}
+      </if>
+      <if test="startDate != null">
+        and date >= #{startDate}
+      </if>
+      <if test="endDate != null">
+        and date &lt;= #{endDate}
+      </if>
+    </where>
+    order by date asc
+  </select>
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from t_dailystock
     where id = #{id,jdbcType=INTEGER}
@@ -45,6 +67,27 @@
       #{turnover,jdbcType=DOUBLE}, #{voturnover,jdbcType=DOUBLE}, #{vaturnove,jdbcType=DOUBLE}, 
       #{tcap,jdbcType=DOUBLE}, #{mcap,jdbcType=DOUBLE})
   </insert>
+
+
+  <insert id="batchInsert" parameterType="java.util.List">
+    insert into t_dailystock (date, code,
+    name, tclose, high, low,
+    topen, lclose, chg, pchg,
+    turnover, voturnover, vaturnove,
+    tcap, mcap) values
+    <foreach collection="list" item="item" index="index" separator=",">
+      ( #{item.date,jdbcType=TIMESTAMP}, #{item.code,jdbcType=VARCHAR},
+      #{item.name,jdbcType=VARCHAR}, #{item.tclose,jdbcType=DOUBLE}, #{item.high,jdbcType=DOUBLE}, #{item.low,jdbcType=DOUBLE},
+      #{item.topen,jdbcType=DOUBLE}, #{item.lclose,jdbcType=DOUBLE}, #{item.chg,jdbcType=DOUBLE}, #{item.pchg,jdbcType=DOUBLE},
+      #{item.turnover,jdbcType=DOUBLE}, #{item.voturnover,jdbcType=DOUBLE}, #{item.vaturnove,jdbcType=DOUBLE},
+      #{item.tcap,jdbcType=DOUBLE}, #{item.mcap,jdbcType=DOUBLE}
+      )
+    </foreach>
+  </insert>
+
+
+
+
   <insert id="insertSelective" parameterType="com.example.model.DailyStock">
     insert into t_dailystock
     <trim prefix="(" suffix=")" suffixOverrides=",">
